@@ -47,6 +47,7 @@ public class App
                 String description = root.path("weather").get(0).path("description").asText();
 
                 //結果を表示
+                //英語で天気が出るのを日本語にできないか？？
                 System.out.println("===" + cityName + "：現在の天気===");
                 System.out.println("天気　：　" + description);
                 System.out.println("気温　：　" + temp + "°C");
