@@ -1,6 +1,7 @@
 package com.weather;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +23,12 @@ public class App
         Dotenv dotenv = Dotenv.load();
         String apiKey = dotenv.get("WEATHER_API_KEY");
 
-        String city = "Tokyo";
+        //入力を受け付ける
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("天気を調べる都市名を入力してください。（例：Osaka, London, Paris）");
+        String city = scanner.nextLine();
+
+        // String city = "Osaka";
         //metric = 摂氏
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=metric";
 
@@ -48,7 +54,7 @@ public class App
 
                 //結果を表示
                 //英語で天気が出るのを日本語にできないか？？
-                System.out.println("===" + cityName + "：現在の天気===");
+                System.out.println("======" + cityName + "：現在の天気======");
                 System.out.println("天気　：　" + description);
                 System.out.println("気温　：　" + temp + "°C");
                 System.out.println("湿度　：　" + humidity + "%");
@@ -59,6 +65,8 @@ public class App
         } catch (IOException e) {
             System.err.println("通信または解析中にエラーが発生しました。");
             e.printStackTrace();
+        } finally {
+            scanner.close();
         }
     }
 }
