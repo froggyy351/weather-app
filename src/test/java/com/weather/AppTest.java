@@ -1,38 +1,30 @@
 package com.weather;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.*;
+import org.junit.jupiter.api.Test;;
 
 /**
  * Unit test for simple App.
+ * mavenのtestコマンドで実行。
  */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+public class AppTest {
+
+    //assertEquals(期待値, テストしたい関数)
+
+    //正常系
+    @Test
+    public void testGetAdviceCold(){
+        assertEquals("コートやダウンなど上着が必須です", App.getAdvice(1.0));
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    @Test
+    public void testGetAdviceCool(){
+        assertEquals("ジャケットがおすすめです", App.getAdvice(11.0));
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    public void testGetAdviceWarm(){
+        assertEquals("半袖でも大丈夫そうです", App.getAdvice(21.0));
     }
 }

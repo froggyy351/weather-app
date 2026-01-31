@@ -17,8 +17,7 @@ import okhttp3.Response;
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ){
         //.envファイルからapikeyを取得
         Dotenv dotenv = Dotenv.load();
         String apiKey = dotenv.get("WEATHER_API_KEY");
@@ -55,9 +54,10 @@ public class App
                 //結果を表示
                 //英語で天気が出るのを日本語にできないか？？
                 System.out.println("======" + cityName + "：現在の天気======");
-                System.out.println("天気　：　" + description);
-                System.out.println("気温　：　" + temp + "°C");
-                System.out.println("湿度　：　" + humidity + "%");
+                System.out.println("天気　　　　：　" + description);
+                System.out.println("気温　　　　：　" + temp + "°C");
+                System.out.println("湿度　　　　：　" + humidity + "%");
+                System.out.println("アドバイス　：　" + getAdvice(temp));
                 System.out.println("=============================");
             } else {
                 System.out.println("エラーが発生しました" + response.code());
@@ -67,6 +67,16 @@ public class App
             e.printStackTrace();
         } finally {
             scanner.close();
+        }
+    }
+
+    public static String getAdvice(double temp){
+        if(temp < 10){
+            return "コートやダウンなど上着が必須です";
+        } else if(temp < 20){
+            return "ジャケットがおすすめです";
+        } else {
+            return "半袖でも大丈夫そうです";
         }
     }
 }
